@@ -68,7 +68,7 @@ public class TbPersonneDAO {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            lesPersonnes = session.createQuery("from TbPersonne").list();
+            lesPersonnes = session.createQuery("from TbPreparateur").list();
             session.getTransaction().commit();
         }
         catch (RuntimeException e) {

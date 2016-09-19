@@ -5,10 +5,11 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_speedymarket_admin?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.username">speedymarket_u</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <property name="show_sql">true</property>
+    <property name="hibernate.connection.password">alacon</property>
     <mapping resource="greta/speedymarket/model/TbCategorie.hbm.xml"/>
     <mapping resource="greta/speedymarket/model/TbStatut.hbm.xml"/>
     <mapping resource="greta/speedymarket/model/TbTva.hbm.xml"/>

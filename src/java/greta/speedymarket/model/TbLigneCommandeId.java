@@ -19,40 +19,42 @@ public class TbLigneCommandeId  implements java.io.Serializable {
        this.idArticle = idArticle;
        this.idCommande = idCommande;
     }
-   
+
     public int getIdArticle() {
         return this.idArticle;
     }
-    
+
     public void setIdArticle(int idArticle) {
         this.idArticle = idArticle;
     }
     public int getIdCommande() {
         return this.idCommande;
     }
-    
+
     public void setIdCommande(int idCommande) {
         this.idCommande = idCommande;
     }
 
 
+     @Override
    public boolean equals(Object other) {
          if ( (this == other ) ) return true;
 		 if ( (other == null ) ) return false;
 		 if ( !(other instanceof TbLigneCommandeId) ) return false;
-		 TbLigneCommandeId castOther = ( TbLigneCommandeId ) other; 
-         
+		 TbLigneCommandeId castOther = ( TbLigneCommandeId ) other;
+
 		 return (this.getIdArticle()==castOther.getIdArticle())
  && (this.getIdCommande()==castOther.getIdCommande());
    }
-   
+
+     @Override
    public int hashCode() {
          int result = 17;
-         
+
          result = 37 * result + this.getIdArticle();
          result = 37 * result + this.getIdCommande();
          return result;
-   }   
+   }
 
 
 }

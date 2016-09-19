@@ -72,7 +72,7 @@ and open the template in the editor.
                                 <h:inputText value="#{TbStatutService.selectedStatut.libelle}" style="width: 300px;" />
                             </p:panelGrid>
                             <br/>
-                            <p:commandButton update=":form:tableStatuts" icon="ui-icon-search" value="Enregistrer"actionListener="#{TbStatutService.saveStatut(TbStatutService.selectedStatut)}"onsuccess="PF('statutDialog').hide()"style="text-align: center;"/>
+                            <p:commandButton update=":form:tableStatuts" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbStatutService.saveStatut(TbStatutService.selectedStatut)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
                         </p:outputPanel>
                     </p:dialog>
                 </h:form>

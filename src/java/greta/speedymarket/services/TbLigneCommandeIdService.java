@@ -10,14 +10,14 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class TbLigneCommandeIdService {
 
-    private TbLigneCommandeId selectedPersonne;
+    private TbLigneCommandeId selectedLigneCommandeId;
 
-    public TbLigneCommandeId getSelectedPersonne() {
-        return this.selectedPersonne;
+    public TbLigneCommandeId getSelectedLigneCommandeId() {
+        return this.selectedLigneCommandeId;
     }
 
-    public void setSelectedPersonne(TbLigneCommandeId selectedPersonne) {
-        this.selectedPersonne = selectedPersonne;
+    public void setSelectedLigneCommandeId(TbLigneCommandeId selectedLigneCommandeId) {
+        this.selectedLigneCommandeId = selectedLigneCommandeId;
     }
 
     public void createStatut() {
@@ -26,22 +26,22 @@ public class TbLigneCommandeIdService {
         tbLigneCommandeIdDAO.save(newLigneCommandeId);
     }
 
-    public void saveStatut(TbLigneCommandeId personne) {
-        if (personne != null) {
+    public void saveStatut(TbLigneCommandeId ligneCommandeId) {
+        if (ligneCommandeId != null) {
             TbLigneCommandeIdDAO tbLigneCommandeIdDAO = new TbLigneCommandeIdDAO();
-            tbLigneCommandeIdDAO.update(personne);
+            tbLigneCommandeIdDAO.update(ligneCommandeId);
         }
     }
 
-    public void deleteStatut(TbLigneCommandeId personne) {
-        if (personne != null) {
+    public void deleteStatut(TbLigneCommandeId ligneCommandeId) {
+        if (ligneCommandeId != null) {
             TbLigneCommandeIdDAO tbLigneCommandeIdDAO = new TbLigneCommandeIdDAO();
-            tbLigneCommandeIdDAO.remove(personne);
+            tbLigneCommandeIdDAO.remove(ligneCommandeId);
         }
     }
 
-    public List<TbLigneCommandeId> loadPersonnes() {
-        TbLigneCommandeIdDAO tbPersonneDAO = new TbLigneCommandeIdDAO();
-        return tbPersonneDAO.findAll();
+    public List<TbLigneCommandeId> loadLigneCommandeId() {
+        TbLigneCommandeIdDAO tbLigneCommandeIdDAO = new TbLigneCommandeIdDAO();
+        return tbLigneCommandeIdDAO.findAll();
     }
 }

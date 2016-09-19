@@ -22,26 +22,26 @@ public class TbTvaService {
 
     public void createStatut() {
         TbTva newStatut = new TbTva("Nouvelle Tva", 0.0f);
-        TbTvaDAO tbStatutDAO = new TbTvaDAO();
-        tbStatutDAO.save(newStatut);
+        TbTvaDAO tbTvaDAO = new TbTvaDAO();
+        tbTvaDAO.save(newStatut);
     }
 
     public void saveStatut(TbTva statut) {
         if (statut != null) {
-            TbTvaDAO tbStatutDAO = new TbTvaDAO();
-            tbStatutDAO.update(statut);
+            TbTvaDAO tbTvaDAO = new TbTvaDAO();
+            tbTvaDAO.update(statut);
         }
     }
 
     public void deleteStatut(TbTva statut) {
         if (statut != null) {
-            TbTvaDAO tbStatutDAO = new TbTvaDAO();
-            tbStatutDAO.remove(statut);
+            TbTvaDAO tbTvaDAO = new TbTvaDAO();
+            tbTvaDAO.remove(statut);
         }
     }
 
-    public List<TbTva> loadStatuts() {
-        TbTvaDAO tbStatutDAO = new TbTvaDAO();
-        return tbStatutDAO.findAll();
+    public List<TbTva> loadTvas() {
+        TbTvaDAO tbTvaDAO = new TbTvaDAO();
+        return tbTvaDAO.findAll();
     }
 }

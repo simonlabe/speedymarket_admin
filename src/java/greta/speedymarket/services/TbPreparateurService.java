@@ -21,27 +21,27 @@ public class TbPreparateurService {
     }
 
     public void createStatut() {
-        TbPreparateur newStatut = new TbPreparateur();
-        TbPreparateurDAO tbStatutDAO = new TbPreparateurDAO();
-        tbStatutDAO.save(newStatut);
+        TbPreparateur newPreparateur = new TbPreparateur();
+        TbPreparateurDAO tbPreparateurDAO = new TbPreparateurDAO();
+        tbPreparateurDAO.save(newPreparateur);
     }
 
-    public void saveStatut(TbPreparateur statut) {
-        if (statut != null) {
-            TbPreparateurDAO tbStatutDAO = new TbPreparateurDAO();
-            tbStatutDAO.update(statut);
+    public void saveStatut(TbPreparateur preparateur) {
+        if (preparateur != null) {
+            TbPreparateurDAO tbPreparateurDAO=  new TbPreparateurDAO();
+            tbPreparateurDAO.update(preparateur);
         }
     }
 
-    public void deleteStatut(TbPreparateur statut) {
-        if (statut != null) {
-            TbPreparateurDAO tbStatutDAO = new TbPreparateurDAO();
-            tbStatutDAO.remove(statut);
+    public void deleteStatut(TbPreparateur preparateur) {
+        if (preparateur != null) {
+            TbPreparateurDAO tbPreparateurDAO = new TbPreparateurDAO();
+            tbPreparateurDAO.remove(preparateur);
         }
     }
 
-    public List<TbPreparateur> loadStatuts() {
-        TbPreparateurDAO tbStatutDAO = new TbPreparateurDAO();
-        return tbStatutDAO.findAll();
+    public List<TbPreparateur> loadPreparateurs() {
+        TbPreparateurDAO tbPreparateurDAO = new TbPreparateurDAO();
+        return tbPreparateurDAO.findAll();
     }
 }

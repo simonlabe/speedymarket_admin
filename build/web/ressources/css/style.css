@@ -1,0 +1,130 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5 sept. 2016, 15:14:42
+    Author     : helldown <helldown.com>
+*/
+* {
+
+ margin: 0px;
+
+ padding: 0px;
+
+ font-size : small; }
+
+html {
+
+ height: 100%; }
+
+body {
+
+ height: 100%;
+
+ color: #444444;
+
+ background-color: red; 
+
+ background-repeat: repeat;
+
+ font-family: Arial, Helvetica, sans-serif; }
+
+#header {
+
+ background-color:#8aaad9;
+
+ height:40px; }
+
+#header #headerContent {
+
+ width: 1200px;
+
+ height: 100%;
+
+ margin: auto; }
+
+#header #headerContent h2 {
+
+ font-family:Facebook Letter Faces;
+
+ color : #FFF;
+
+ font-size : large;
+
+ padding-top:10px;
+
+ padding-left:10px; }
+
+#content {
+
+ position: relative;
+
+ margin:0 auto;
+
+ text-align:center;
+
+ width: 100%;
+
+ position: relative;
+
+ min-height: 100%;
+
+ background-position:left top;
+
+ background-repeat: no-repeat;
+
+ z-index: 3; }
+
+#footer {
+
+ padding-top:15px;
+
+ line-height : 25px;
+
+ width: 1200px;
+
+ margin: auto; }
+
+#footer span {
+
+ background-repeat : no-repeat;
+
+ border-left : 1px solid #D6D6D6;
+
+ padding:0;
+
+ height:85px;
+
+ float : right;
+
+ margin-top:-110px;
+
+ margin-right:0px;
+
+ width:83.4%;
+
+ text-align: center;
+
+ font-color : #000;
+
+ padding-top:35px;
+
+ font-size : large; }
+
+#footer span h1 {
+
+ text-shadow: -1px -1px 1px #FFF;
+
+ color : #B0B0B0;
+
+ font-size : x-large; }
+
+#footer span i {
+
+ text-shadow: -1px -1px 1px #FFF;
+
+ color : #B0B0B0;
+
+ font-size : medium; }

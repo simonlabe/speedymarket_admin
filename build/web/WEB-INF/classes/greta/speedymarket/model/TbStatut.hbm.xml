@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbStatut" table="tb_statut" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="idStatut" type="java.lang.Integer">
+            <column name="id_statut" />
+            <generator class="identity" />
+        </id>
+        <property name="SLibelle" type="string">
+            <column name="s_libelle" length="50" not-null="true" />
+        </property>
+        <set name="tbCommandes" table="tb_commande" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_statut" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbCommande" />
+        </set>
+    </class>
+</hibernate-mapping>

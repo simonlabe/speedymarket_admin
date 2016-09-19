@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbImage" table="tb_image" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="urlImage" type="string">
+            <column name="url_image" length="200" />
+            <generator class="assigned" />
+        </id>
+        <property name="INom" type="string">
+            <column name="i_nom" length="100" not-null="true" />
+        </property>
+        <property name="ILibelle" type="string">
+            <column name="i_libelle" length="100" />
+        </property>
+        <set name="tbArticles" table="tb_article" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="url_image" length="200" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbArticle" />
+        </set>
+        <set name="tbCategories" table="tb_categorie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="url_image" length="200" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbCategorie" />
+        </set>
+    </class>
+</hibernate-mapping>

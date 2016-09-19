@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_speedymarket_admin?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
+    <property name="show_sql">true</property>
+    <mapping resource="greta/speedymarket/model/TbCategorie.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbStatut.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbTva.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbPersonne.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbClient.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbImage.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbCommande.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbArticle.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbLigneCommande.hbm.xml"/>
+    <mapping resource="greta/speedymarket/model/TbPreparateur.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbArticle" table="tb_article" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="idArticle" type="java.lang.Integer">
+            <column name="id_article" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbCategorie" class="greta.speedymarket.model.TbCategorie" fetch="select">
+            <column name="id_categorie" />
+        </many-to-one>
+        <many-to-one name="tbImage" class="greta.speedymarket.model.TbImage" fetch="select">
+            <column name="url_image" length="200" />
+        </many-to-one>
+        <many-to-one name="tbTva" class="greta.speedymarket.model.TbTva" fetch="select">
+            <column name="id_tva" />
+        </many-to-one>
+        <property name="ADesignation" type="string">
+            <column name="a_designation" length="100" not-null="true" />
+        </property>
+        <property name="APht" type="java.lang.Float">
+            <column name="a_pht" precision="6" />
+        </property>
+        <property name="ADescription" type="string">
+            <column name="a_description" length="65535" />
+        </property>
+        <property name="AQuantiteStock" type="java.lang.Integer">
+            <column name="a_quantite_stock" />
+        </property>
+        <property name="AVisible" type="boolean">
+            <column name="a_visible" not-null="true" />
+        </property>
+        <set name="tbLigneCommandes" table="tb_ligne_commande" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_article" not-null="true" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbLigneCommande" />
+        </set>
+    </class>
+</hibernate-mapping>

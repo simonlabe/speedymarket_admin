@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbPersonne" table="tb_personne" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="idPersonne" type="java.lang.Integer">
+            <column name="id_personne" />
+            <generator class="identity" />
+        </id>
+        <property name="PNom" type="string">
+            <column name="p_nom" length="100" not-null="true" />
+        </property>
+        <property name="PPrenom" type="string">
+            <column name="p_prenom" length="100" not-null="true" />
+        </property>
+        <property name="PArue" type="string">
+            <column name="p_arue" length="100" />
+        </property>
+        <property name="PAville" type="string">
+            <column name="p_aville" length="100" not-null="true" />
+        </property>
+        <property name="PAcp" type="int">
+            <column name="p_acp" not-null="true" />
+        </property>
+        <property name="PTel" type="java.lang.Integer">
+            <column name="p_tel" />
+        </property>
+        <property name="PMail" type="string">
+            <column name="p_mail" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="PMdp" type="string">
+            <column name="p_mdp" length="128" not-null="true" />
+        </property>
+        <set name="tbCommandesForClientIdPers" table="tb_commande" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="client_id_pers" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbCommande" />
+        </set>
+        <one-to-one name="tbPreparateur" class="greta.speedymarket.model.TbPreparateur"></one-to-one>
+        <one-to-one name="tbClient" class="greta.speedymarket.model.TbClient"></one-to-one>
+        <set name="tbCommandesForPrepaIdPers" table="tb_commande" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="prepa_id_pers" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbCommande" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="db_speedymarket_admin"/>
+  <table-filter match-name="tb_ligne_commande"/>
+  <table-filter match-name="tb_statut"/>
+  <table-filter match-name="tb_commande"/>
+  <table-filter match-name="tb_preparateur"/>
+  <table-filter match-name="tb_image"/>
+  <table-filter match-name="tb_categorie"/>
+  <table-filter match-name="tb_tva"/>
+  <table-filter match-name="tb_personne"/>
+  <table-filter match-name="tb_client"/>
+  <table-filter match-name="tb_article"/>
+</hibernate-reverse-engineering>

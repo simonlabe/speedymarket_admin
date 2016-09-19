@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbCategorie" table="tb_categorie" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="idCategorie" type="java.lang.Integer">
+            <column name="id_categorie" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbCategorie" class="greta.speedymarket.model.TbCategorie" fetch="select">
+            <column name="id_categorie_mere" />
+        </many-to-one>
+        <many-to-one name="tbImage" class="greta.speedymarket.model.TbImage" fetch="select">
+            <column name="url_image" length="200" />
+        </many-to-one>
+        <property name="CLibelle" type="string">
+            <column name="c_libelle" length="100" not-null="true" />
+        </property>
+        <set name="tbArticles" table="tb_article" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_categorie" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbArticle" />
+        </set>
+        <set name="tbCategories" table="tb_categorie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_categorie_mere" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbCategorie" />
+        </set>
+    </class>
+</hibernate-mapping>

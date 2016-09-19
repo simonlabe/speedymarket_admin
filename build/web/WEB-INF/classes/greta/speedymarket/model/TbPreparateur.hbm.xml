@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbPreparateur" table="tb_preparateur" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="idPersonne" type="int">
+            <column name="id_personne" />
+            <generator class="foreign">
+                <param name="property">tbPersonne</param>
+            </generator>
+        </id>
+        <one-to-one name="tbPersonne" class="greta.speedymarket.model.TbPersonne" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbCommande" table="tb_commande" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <id name="idCommande" type="java.lang.Integer">
+            <column name="id_commande" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbPersonneByClientIdPers" class="greta.speedymarket.model.TbPersonne" fetch="select">
+            <column name="client_id_pers" />
+        </many-to-one>
+        <many-to-one name="tbPersonneByPrepaIdPers" class="greta.speedymarket.model.TbPersonne" fetch="select">
+            <column name="prepa_id_pers" />
+        </many-to-one>
+        <many-to-one name="tbStatut" class="greta.speedymarket.model.TbStatut" fetch="select">
+            <column name="id_statut" />
+        </many-to-one>
+        <property name="CDate" type="timestamp">
+            <column name="c_date" length="19" not-null="true" />
+        </property>
+        <property name="CDateretrait" type="date">
+            <column name="c_dateretrait" length="10" />
+        </property>
+        <set name="tbLigneCommandes" table="tb_ligne_commande" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_commande" not-null="true" />
+            </key>
+            <one-to-many class="greta.speedymarket.model.TbLigneCommande" />
+        </set>
+    </class>
+</hibernate-mapping>

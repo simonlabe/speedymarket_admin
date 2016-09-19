@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 sept. 2016 16:52:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="greta.speedymarket.model.TbLigneCommande" table="tb_ligne_commande" catalog="db_speedymarket_admin" optimistic-lock="version">
+        <composite-id name="id" class="greta.speedymarket.model.TbLigneCommandeId">
+            <key-property name="idArticle" type="int">
+                <column name="id_article" />
+            </key-property>
+            <key-property name="idCommande" type="int">
+                <column name="id_commande" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbArticle" class="greta.speedymarket.model.TbArticle" update="false" insert="false" fetch="select">
+            <column name="id_article" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbCommande" class="greta.speedymarket.model.TbCommande" update="false" insert="false" fetch="select">
+            <column name="id_commande" not-null="true" />
+        </many-to-one>
+        <property name="qteCmde" type="int">
+            <column name="qte_cmde" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

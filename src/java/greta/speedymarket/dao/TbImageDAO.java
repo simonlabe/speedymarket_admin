@@ -42,7 +42,7 @@ public class TbImageDAO {
 
     public void update(TbImage image) {
 
-        System.out.println("merge image " + statut.getIdImage() + " - " + image.getSLibelle());
+        System.out.println("merge image " + image.getINom() + " - " + image.getILibelle());
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 

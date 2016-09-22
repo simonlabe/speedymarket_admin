@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package greta.speedymarket.services;
+
 import greta.speedymarket.dao.TbArticleDAO;
 import greta.speedymarket.model.TbArticle;
 import java.io.Serializable;
@@ -17,26 +18,32 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.FaceletContext;
 
-
 /**
  *
  * @author helldown
  */
 @ManagedBean(name = "TbArticleService")
 @ViewScoped
-public class TbArticleService {
+public class TbArticleService implements Serializable {
+
+    private static final long serialVersionUID = 4003047561926425600L;
 
     private TbArticle selectedArticle;
     private List<TbArticle> articles;
-    private final static List<String> COLUMN_KEYS = Arrays.asList("idArticle", "ADesignation", "ADescription", "idCategorie", "AQuantiteStock", "AVisible");
+    private final static List<String> COLUMN_KEYS = Arrays.asList("idArticle",
+                                                                  "ADesignation",
+                                                                  "ADescription",
+                                                                  "idCategorie",
+                                                                  "AQuantiteStock",
+                                                                  "AVisible");
     private List<ColumnModel> columns;
     private String columnTemplate = "idArticle ADesignation ADescription AQuantiteStock AVisible";
 
-    public TbArticle getSelectedArticle (){
+    public TbArticle getSelectedArticle() {
         return this.selectedArticle;
     }
 
-    public void setSelectedArticle (TbArticle selectedArticle){
+    public void setSelectedArticle(TbArticle selectedArticle) {
         this.selectedArticle = selectedArticle;
     }
 
@@ -68,17 +75,19 @@ public class TbArticleService {
 
         this.columns = new ArrayList<>();
 
-        for (String columnKey: columnKeys){
+        for (String columnKey : columnKeys) {
             String key = columnKey.trim();
 
             if (COLUMN_KEYS.contains(key)) {
-                this.columns.add(new ColumnModel(columnKey.toUpperCase(), columnKey));
+                this.columns.add(new ColumnModel(columnKey.toUpperCase(),
+                                                 columnKey));
             }
         }
     }
 
     private void updateColumns() {
-        UIComponent table = FacesContext.getCurrentInstance().getViewRoot().findComponent(":form:tablesArticles");
+        UIComponent table = FacesContext.getCurrentInstance().getViewRoot()
+                .findComponent(":form:tablesArticles");
 
         table.setValueExpression("sortBy", null);
 
@@ -86,31 +95,33 @@ public class TbArticleService {
         createDynamicColumns();
     }
 
-    public void createArticle(){
-        TbArticle newArticle = new TbArticle();
+    public void createArticle() {
+        TbArticle newArticle = new TbArticle("Nouvel Article", false);
         TbArticleDAO tbArticleDAO = new TbArticleDAO();
         tbArticleDAO.save(newArticle);
     }
 
-    public void saveArticle (TbArticle article){
-        if (article != null){
+    public void saveArticle(TbArticle article) {
+        if (article != null) {
             TbArticleDAO tbArticleDAO = new TbArticleDAO();
             tbArticleDAO.update(article);
         }
     }
 
-    public void deleteArticle (TbArticle article){
-        if(article != null){
+    public void deleteArticle(TbArticle article) {
+        if (article != null) {
             TbArticleDAO tbArticleDAO = new TbArticleDAO();
             tbArticleDAO.remove(article);
         }
     }
 
-    public List<TbArticle> loadArticles(){
-        TbArticleDAO tbArticleDAO = new TbArticleDAO();
-        this.articles = tbArticleDAO.findAll();
+    public List<TbArticle> loadArticles() {
+        if (this.articles == null) {
+            TbArticleDAO tbArticleDAO = new TbArticleDAO();
+            this.articles = tbArticleDAO.findAll();
+        }
 
-        createArticle();
+//        createArticle();
 
         return this.articles;
     }

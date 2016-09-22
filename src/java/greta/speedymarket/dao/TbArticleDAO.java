@@ -19,7 +19,7 @@ import org.hibernate.Session;
 public class TbArticleDAO {
     
     public void save(TbArticle article) {
-        System.out.println("persist article test");
+        System.out.println("persist article");
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {

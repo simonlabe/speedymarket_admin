@@ -45,7 +45,7 @@ and open the template in the editor.
                         template="/templates/template.xhtml">
 
             <ui:define name="content">
-
+                
                 <h:form id="form">
                     <p:dataTable id="tableStatuts" var="statut" value="#{TbStatutService.loadStatuts()}"
                                  selectionMode="single" selection="#{TbStatutService.selectedStatut}" rowKey="#{statut.idStatut}"

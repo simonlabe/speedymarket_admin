@@ -46,7 +46,57 @@ and open the template in the editor.
 
             <ui:define name="content">
 
-                ARTICLES
+                <h:form id="form">
+                    <p:dataTable id="tablesArticles" var="article" value="#{TbArticleService.loadArticles()}"
+                                 selectionMode="single" selection="#{TbArticleService.selectedArticle}" rowKey="#{article.idArticle}"
+                                 rows="25" paginator="true">
+                        <p:columns value="#{TbArticleService.columns}" var="column" columnIndexVar="colIndex" sortBy="#{article[column.property]}">
+                        <f:facet name="header">
+                            <h:outputText value="#{column.header}" />
+                        </f:facet>
+                            <h:outputText value="#{article[column.property]}" />
+                        </p:columns>
+                        <p:ajax event="rowSelect" update=":form" />
+
+                        <!--
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{article.idArticle}" />
+                        </p:column>
+                        <p:column headerText="Libellé">
+                            <p:outputLabel value="#{article.ADesignation}" />
+                        </p:column>
+                        <p:column headerText="Description">
+                            <p:outputLabel value="#{article.ADescription}" />
+                        </p:column>
+                        <p:column headerText="Catégorie">
+                            <p:outputLabel value="#{article.tbCategorie.CLibelle}" />
+                        </p:column>
+                        <p:column headerText="Stock">
+                            <p:outputLabel value="#{article.AQuantiteStock}" />
+                        </p:column>
+                        <p:column headerText="Visible">
+                            <p:outputLabel value="#{article.AVisible}" />
+                        </p:column>-->
+
+                        <f:facet name="footer">
+                            <p:commandButton update=":form:tablesArticles" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbArticleService.createArticle()}" />
+                            <p:commandButton update=":form:statutDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbArticleService.selectedArticle}" />
+                            <p:commandButton update=":form:tablesArticles" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" disabled="#{empty TbArticleService.selectedArticle}" />
+                        </f:facet>
+                    </p:dataTable>
+                    <p:dialog header="Détail statut" widgetVar="statutDialog"
+                              showEffect="fade" hideEffect="fade"
+                              resizable="true" height="100" width="450" >
+                        <p:outputPanel id="statutDetail" >
+                            <p:panelGrid columns="2" rendered="#{not empty TbArticleService.selectedArticle}" columnClasses="label,value">
+                                <h:outputText value="Libellé" />
+                                <h:inputText value="#{TbArticleService.selectedArticle.ADesignation}" style="width: 300px;" />
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton update=":form:tablesArticles" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
+                        </p:outputPanel>
+                    </p:dialog>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

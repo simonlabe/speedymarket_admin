@@ -20,20 +20,20 @@ public class TbPersonneService {
         this.selectedPersonne = selectedPersonne;
     }
 
-    public void createStatut() {
+    public void createPersonne() {
         TbPersonne newStatut = new TbPersonne();
         TbPersonneDAO tbStatutDAO = new TbPersonneDAO();
         tbStatutDAO.save(newStatut);
     }
 
-    public void saveStatut(TbPersonne personne) {
+    public void savePersonne(TbPersonne personne) {
         if (personne != null) {
             TbPersonneDAO tbStatutDAO = new TbPersonneDAO();
             tbStatutDAO.update(personne);
         }
     }
 
-    public void deleteStatut(TbPersonne personne) {
+    public void deletePersonne(TbPersonne personne) {
         if (personne != null) {
             TbPersonneDAO tbStatutDAO = new TbPersonneDAO();
             tbStatutDAO.remove(personne);

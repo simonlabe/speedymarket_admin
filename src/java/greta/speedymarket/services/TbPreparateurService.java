@@ -20,20 +20,20 @@ public class TbPreparateurService {
         this.selectedPreparateur = selectedPreparateur;
     }
 
-    public void createStatut() {
+    public void createPreparateur() {
         TbPreparateur newPreparateur = new TbPreparateur();
         TbPreparateurDAO tbPreparateurDAO = new TbPreparateurDAO();
         tbPreparateurDAO.save(newPreparateur);
     }
 
-    public void saveStatut(TbPreparateur preparateur) {
+    public void savePreparateur(TbPreparateur preparateur) {
         if (preparateur != null) {
             TbPreparateurDAO tbPreparateurDAO=  new TbPreparateurDAO();
             tbPreparateurDAO.update(preparateur);
         }
     }
 
-    public void deleteStatut(TbPreparateur preparateur) {
+    public void deletePreparateur(TbPreparateur preparateur) {
         if (preparateur != null) {
             TbPreparateurDAO tbPreparateurDAO = new TbPreparateurDAO();
             tbPreparateurDAO.remove(preparateur);

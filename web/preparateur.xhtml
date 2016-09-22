@@ -13,7 +13,7 @@
                          selectionMode="single" selection="#{TbPreparateurService.selectedPreparateur}" rowKey="#{preparateur.idPersonne}"
                          rows="10" paginator="true">
                 <f:facet name="header">
-                    Liste des statuts
+                    Liste des préparateurs
                 </f:facet>
                 <p:ajax event="rowSelect" update=":form" />
                 <p:column headerText="identifiant">
@@ -23,8 +23,8 @@
                     <p:outputLabel value="#{preparateur.tbPersonne}" />
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton update=":form:tableStatuts" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbPreparateurService.createPreparateur()}" />
-                    <p:commandButton update=":form:statutDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbPreparateurService.selectedPreparateur()}" />
+                    <p:commandButton update=":form:tablePreparateurs" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbPreparateurService.createPreparateur()}" />
+                    <p:commandButton update=":form:preparateurDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbPreparateurService.selectedPreparateur()}" />
                         </f:facet>
             </p:dataTable>
         </h:form>

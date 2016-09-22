@@ -46,7 +46,40 @@ and open the template in the editor.
 
             <ui:define name="content">
 
-                CATEGORIES
+                
+                 
+                
+                <h:form id="form">
+                    <p:dataTable id="tableStatuts" var="statut" value="#{TbStatutService.loadStatuts()}"
+                                 selectionMode="single" selection="#{TbStatutService.selectedStatut}" rowKey="#{statut.idStatut}"
+                                 rows="10" paginator="true">
+                        <f:facet name="header">
+                            Liste des statuts
+                        </f:facet>
+                        <p:ajax event="rowSelect" update=":form" />
+                        <p:column headerText="Libellé">
+                            <p:outputLabel value="#{statut.SLibelle}" />
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton update=":form:tableStatuts" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbStatutService.createStatut()}" />
+                            <p:commandButton update=":form:statutDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbStatutService.selectedStatut}" />
+                            <p:commandButton update=":form:tableStatuts" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbStatutService.deleteStatut(TbStatutService.selectedStatut)}" disabled="#{empty TbStatutService.selectedStatut}" />
+                        </f:facet>
+                    </p:dataTable>
+                    <p:dialog header="Détail statut" widgetVar="statutDialog"
+                              showEffect="fade" hideEffect="fade"
+                              resizable="true" height="100" width="450" >
+                        <p:outputPanel id="statutDetail" >
+                            <p:panelGrid columns="2" rendered="#{not empty TbStatutService.selectedStatut}" columnClasses="label,value">
+                                <h:outputText value="Libellé" />
+                                <h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton update=":form:tableStatuts" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbStatutService.saveStatut(TbStatutService.selectedStatut)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
+                        </p:outputPanel>
+                    </p:dialog>
+                </h:form>
+           
             </ui:define>
         </ui:composition>
     </h:body>

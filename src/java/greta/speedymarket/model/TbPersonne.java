@@ -144,7 +144,12 @@ public class TbPersonne  implements java.io.Serializable {
         this.tbCommandesForPrepaIdPers = tbCommandesForPrepaIdPers;
     }
 
+    @Override
+    public String toString() {
+        return this.PNom+" "+this.PPrenom;
+    }
 
+    
 
 
 }

@@ -20,20 +20,20 @@ public class TbLigneCommandeService {
         this.selectedLigneCommande = selectedLigneCommande;
     }
 
-    public void createStatut() {
+    public void createLigneCommande() {
         TbLigneCommande newLigneCommande = new TbLigneCommande();
         TbLigneCommandeDAO tbLigneCommandeDAO = new TbLigneCommandeDAO();
         tbLigneCommandeDAO.save(newLigneCommande);
     }
 
-    public void saveStatut(TbLigneCommande ligneCommande) {
+    public void saveLigneCommande(TbLigneCommande ligneCommande) {
         if (ligneCommande != null) {
             TbLigneCommandeDAO tbLigneCommandeDAO = new TbLigneCommandeDAO();
             tbLigneCommandeDAO.update(ligneCommande);
         }
     }
 
-    public void deleteStatut(TbLigneCommande ligneCommande) {
+    public void deleteLigneCommande(TbLigneCommande ligneCommande) {
         if (ligneCommande != null) {
             TbLigneCommandeDAO tbLigneCommandeDAO = new TbLigneCommandeDAO();
             tbLigneCommandeDAO.remove(ligneCommande);

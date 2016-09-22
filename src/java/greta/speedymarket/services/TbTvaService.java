@@ -20,20 +20,20 @@ public class TbTvaService {
         this.selectedTva = selectedTva;
     }
 
-    public void createStatut() {
+    public void createTva() {
         TbTva newStatut = new TbTva("Nouvelle Tva", 0.0f);
         TbTvaDAO tbTvaDAO = new TbTvaDAO();
         tbTvaDAO.save(newStatut);
     }
 
-    public void saveStatut(TbTva statut) {
+    public void saveTva(TbTva statut) {
         if (statut != null) {
             TbTvaDAO tbTvaDAO = new TbTvaDAO();
             tbTvaDAO.update(statut);
         }
     }
 
-    public void deleteStatut(TbTva statut) {
+    public void deleteTva(TbTva statut) {
         if (statut != null) {
             TbTvaDAO tbTvaDAO = new TbTvaDAO();
             tbTvaDAO.remove(statut);

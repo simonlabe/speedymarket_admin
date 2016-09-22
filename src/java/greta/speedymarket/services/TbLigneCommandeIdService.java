@@ -20,20 +20,20 @@ public class TbLigneCommandeIdService {
         this.selectedLigneCommandeId = selectedLigneCommandeId;
     }
 
-    public void createStatut() {
+    public void createLigneCommandeId() {
         TbLigneCommandeId newLigneCommandeId = new TbLigneCommandeId();
         TbLigneCommandeIdDAO tbLigneCommandeIdDAO = new TbLigneCommandeIdDAO();
         tbLigneCommandeIdDAO.save(newLigneCommandeId);
     }
 
-    public void saveStatut(TbLigneCommandeId ligneCommandeId) {
+    public void saveLigneCommandeId(TbLigneCommandeId ligneCommandeId) {
         if (ligneCommandeId != null) {
             TbLigneCommandeIdDAO tbLigneCommandeIdDAO = new TbLigneCommandeIdDAO();
             tbLigneCommandeIdDAO.update(ligneCommandeId);
         }
     }
 
-    public void deleteStatut(TbLigneCommandeId ligneCommandeId) {
+    public void deleteLigneCommandeId(TbLigneCommandeId ligneCommandeId) {
         if (ligneCommandeId != null) {
             TbLigneCommandeIdDAO tbLigneCommandeIdDAO = new TbLigneCommandeIdDAO();
             tbLigneCommandeIdDAO.remove(ligneCommandeId);

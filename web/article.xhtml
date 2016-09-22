@@ -49,34 +49,45 @@ and open the template in the editor.
                 <h:form id="form">
                     <p:dataTable id="tablesArticles" var="article" value="#{TbArticleService.loadArticles()}"
                                  selectionMode="single" selection="#{TbArticleService.selectedArticle}" rowKey="#{article.idArticle}"
-                                 rows="25" paginator="true">
-                        <p:columns value="#{TbArticleService.columns}" var="column" columnIndexVar="colIndex" sortBy="#{article[column.property]}">
+                                 rows="10" paginator="true">
                         <f:facet name="header">
-                            <h:outputText value="#{column.header}" />
+                            Liste des produits
                         </f:facet>
-                            <h:outputText value="#{article[column.property]}" />
-                        </p:columns>
+
                         <p:ajax event="rowSelect" update=":form" />
 
-                        <!--
-                        <p:column headerText="ID">
+
+                        <p:column headerText="ID" sortBy="#{article.idArticle}">
                             <p:outputLabel value="#{article.idArticle}" />
                         </p:column>
-                        <p:column headerText="Libellé">
+
+                        <p:column headerText="Libellé" sortBy="#{article.ADesignation}">
                             <p:outputLabel value="#{article.ADesignation}" />
                         </p:column>
-                        <p:column headerText="Description">
+
+                        <p:column headerText="Image">
+                            <p:outputLabel value="#{article.tbImage.urlImage}" />
+                        </p:column>
+
+                        <p:column headerText="Description" sortBy="#{article.ADescription}">
                             <p:outputLabel value="#{article.ADescription}" />
                         </p:column>
-                        <p:column headerText="Catégorie">
+
+                        <p:column headerText="Catégorie" sortBy="#{article.tbCategorie.CLibelle}">
                             <p:outputLabel value="#{article.tbCategorie.CLibelle}" />
                         </p:column>
-                        <p:column headerText="Stock">
+
+                        <p:column headerText="Prix HT" sortBy="#{article.APht}" >
+                            <p:outputLabel value="#{article.APht}" />
+                        </p:column>
+
+                        <p:column headerText="Stock" sortBy="#{article.AQuantiteStock}">
                             <p:outputLabel value="#{article.AQuantiteStock}" />
                         </p:column>
-                        <p:column headerText="Visible">
-                            <p:outputLabel value="#{article.AVisible}" />
-                        </p:column>-->
+
+                        <p:column headerText="Visible" sortBy="#{article.AVisible}">
+                            <p:selectBooleanCheckbox value="#{article.AVisible}" />
+                        </p:column>
 
                         <f:facet name="footer">
                             <p:commandButton update=":form:tablesArticles" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbArticleService.createArticle()}" />
@@ -93,7 +104,7 @@ and open the template in the editor.
                                 <h:inputText value="#{TbArticleService.selectedArticle.ADesignation}" style="width: 300px;" />
                             </p:panelGrid>
                             <br/>
-                            <p:commandButton update=":form:tablesArticles" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
+                            <p:commandButton update=":form:tablesArticles" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbArticleService.saveArticle(TbArticleService.selectedArticle)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
                         </p:outputPanel>
                     </p:dialog>
                 </h:form>

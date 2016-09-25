@@ -16,7 +16,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.FaceletContext;
 
 /**
  *
@@ -26,20 +25,13 @@ import javax.faces.view.facelets.FaceletContext;
 @ViewScoped
 public class TbArticleService implements Serializable {
 
-    private static final long serialVersionUID = 4003047561926425600L;
-
     private TbArticle selectedArticle;
     private List<TbArticle> articles;
-    private final static List<String> COLUMN_KEYS = Arrays.asList("idArticle",
-                                                                  "ADesignation",
-                                                                  "ADescription",
-                                                                  "idCategorie",
-                                                                  "AQuantiteStock",
-                                                                  "AVisible");
-    private List<ColumnModel> columns;
-    private String columnTemplate = "idArticle ADesignation ADescription AQuantiteStock AVisible";
 
     public TbArticle getSelectedArticle() {
+        if (this.selectedArticle == null) {
+            this.selectedArticle = new TbArticle("Nouvel Article Youpi!!!", true);
+        }
         return this.selectedArticle;
     }
 
@@ -47,52 +39,17 @@ public class TbArticleService implements Serializable {
         this.selectedArticle = selectedArticle;
     }
 
-    public List<TbArticle> getArticles() {
-        return this.articles;
-    }
-
-    public List<ColumnModel> getColumns() {
-        return this.columns;
-    }
-
-    public String getColumnTemplate() {
-        return columnTemplate;
-    }
-
-    public void setColumnTemplate(String columnTemplate) {
-        this.columnTemplate = columnTemplate;
-    }
-
     @PostConstruct
     public void init() {
         articles = this.loadArticles();
-
-        createDynamicColumns();
     }
 
-    private void createDynamicColumns() {
-        String[] columnKeys = this.columnTemplate.split(" ");
-
-        this.columns = new ArrayList<>();
-
-        for (String columnKey : columnKeys) {
-            String key = columnKey.trim();
-
-            if (COLUMN_KEYS.contains(key)) {
-                this.columns.add(new ColumnModel(columnKey.toUpperCase(),
-                                                 columnKey));
-            }
-        }
+    public void onRowEdit() {
+        this.saveArticle(selectedArticle);
     }
 
-    private void updateColumns() {
-        UIComponent table = FacesContext.getCurrentInstance().getViewRoot()
-                .findComponent(":form:tablesArticles");
-
-        table.setValueExpression("sortBy", null);
-
-        //update columns
-        createDynamicColumns();
+    public void onRowEditCancel() {
+        return;
     }
 
     public void createArticle() {
@@ -104,7 +61,11 @@ public class TbArticleService implements Serializable {
     public void saveArticle(TbArticle article) {
         if (article != null) {
             TbArticleDAO tbArticleDAO = new TbArticleDAO();
-            tbArticleDAO.update(article);
+            System.out.println("Article ID is " + article.getIdArticle());
+            if (article.getIdArticle() != null)
+                tbArticleDAO.update(article);
+            else
+                tbArticleDAO.save(article);
         }
     }
 
@@ -121,27 +82,6 @@ public class TbArticleService implements Serializable {
             this.articles = tbArticleDAO.findAll();
         }
 
-//        createArticle();
-
         return this.articles;
-    }
-
-    static public class ColumnModel implements Serializable {
-
-        private String header;
-        private String property;
-
-        public ColumnModel(String header, String property) {
-            this.header = header;
-            this.property = property;
-        }
-
-        public String getHeader() {
-            return header;
-        }
-
-        public String getProperty() {
-            return property;
-        }
     }
 }

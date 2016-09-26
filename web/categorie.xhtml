@@ -1,82 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
 
-    <h:head>
-        <title>Speedy Market Admin</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    </h:head>
+    <ui:define name="content">
+        <h:form id="form">
 
-    <h:body>
+            <p:treeTable id="tableCategories" value="#{TbCategorieService.root}" var="cat"
+                         selectionMode="single" selection="#{TbCategorieService.selectedNode}"
+                         scrollable="true" scrollHeight="500"
+                         resizableColumns="true" style="margin-top: 0">
+                <f:facet name="header">
+                    Table des catégories
+                </f:facet>
+                <p:column headerText="Libellé">
+                    <h:outputText value="#{cat.CLibelle}" />
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton update=":form" icon="ui-icon-plusthick" value="Ajouter"
+                                     actionListener="#{TbCategorieService.createCategorie()}" />
+                    <p:commandButton update=":form:categorieDetail" icon="ui-icon-search" value="Éditer"
+                                     oncomplete="PF('categorieDialog').show()" />
+                    <p:commandButton update=":form" icon="ui-icon-close-thick" value="Supprimer"
+                                     actionListener="#{TbCategorieService.deleteCategorie(TbCategorieService.selectedNodeCategorie)}"  />
+                </f:facet>
+            </p:treeTable>
 
-        <div id="header">
-            <div id="headerContent">
-                <h2>Speedy Market</h2>
-            </div>
-        </div>
-
-        <h:panelGroup id="content" layout="block">
-            <ui:insert name="content">Main Content</ui:insert>
-        </h:panelGroup>
-
-        <div id="footer">
-            <span>
-                <h1>SpeedyMarket</h1>
-                <i>Application d'administration des produits, comptes, commandes...</i>
-            </span>
-        </div>
-
-        <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                        xmlns:ui="http://java.sun.com/jsf/facelets"
-                        xmlns:f="http://java.sun.com/jsf/core"
-                        xmlns:h="http://java.sun.com/jsf/html"
-                        xmlns:c="http://java.sun.com/jsp/jstl/core"
-                        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-                        template="/templates/template.xhtml">
-
-            <ui:define name="content">
-                <h:form id="form">
-                    <p:dataTable id="tableCategorie" var="categorie" value="#{TbCategorieService.loadCategorie()}"
-                                 selectionMode="single" selection="#{TbCategorieService.selectedCategorie}" rowKey="#{categorie.idCategorie}"
-                                 rows="10" paginator="true">
-                        <f:facet name="header">
-                            Liste des catégories
-                        </f:facet>
-                        <p:ajax event="rowSelect" update=":form" />
-                        <p:column headerText="Libellé">
-                            <p:outputLabel value="#{categorie.CLibelle}" />
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton update=":form:tableCategorie" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbCategorieService.createCategorie()}" />
-                            <p:commandButton update=":form:categorieDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbCategorieService.selectedCategorie}" />
-                            <p:commandButton update=":form:tableCategorie" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbCategorieService.deleteCategorie(TbCategorieService.selectedCategorie)}" disabled="#{empty TbCategorieService.selectedCategorie}" />
-                        </f:facet>
-                    </p:dataTable>
-                    <p:dialog header="Détail catégorie" widgetVar="statutDialog"
-                              showEffect="fade" hideEffect="fade"
-                              resizable="true" height="100" width="450" >
-                        <p:outputPanel id="categorieDetail" >
-                            <p:panelGrid columns="2" rendered="#{not empty TbCategorieService.selectedCategorie}" columnClasses="label,value">
-                                <h:outputText value="Libellé" />
-                                <h:inputText value="#{TbCategorieService.selectedCategorie.CLibelle}" style="width: 300px;" />
-                            </p:panelGrid>
-                            <br/>
-                            <p:commandButton update=":form:tableCategorie" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbCategorieService.saveCategorie(TbCategorieService.selectedCategorie)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
-                        </p:outputPanel>
-                    </p:dialog>
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-
-</html>
+            <p:dialog header="Détail catégorie" widgetVar="statutDialog"
+                      showEffect="fade" hideEffect="fade"
+                      resizable="true" height="100" width="450" >
+                <p:outputPanel id="categorieDetail" >
+                    <p:panelGrid columns="2" rendered="#{not empty TbCategorieService.selectedCategorie}" columnClasses="label,value">
+                        <h:outputText value="Libellé" />
+                        <h:inputText value="#{TbCategorieService.selectedCategorie.CLibelle}" style="width: 300px;" />
+                    </p:panelGrid>
+                    <br/>
+                    <p:commandButton update=":form:tableCategorie" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbCategorieService.saveCategorie(TbCategorieService.selectedCategorie)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

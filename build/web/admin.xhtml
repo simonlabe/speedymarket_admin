@@ -14,7 +14,7 @@ and open the template in the editor.
 
     <h:head>
         <title>Speedy Market Admin</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </h:head>
 
     <h:body>
@@ -45,9 +45,9 @@ and open the template in the editor.
                         template="/templates/template.xhtml">
 
             <ui:define name="content">
-
+                
                 <h:form id="form">
-                    <p:dataTable id="tableStatuts" var="statut" value="#{TbStatutService.loadStatuts()}"  
+                    <p:dataTable id="tableStatuts" var="statut" value="#{TbStatutService.loadStatuts()}"
                                  selectionMode="single" selection="#{TbStatutService.selectedStatut}" rowKey="#{statut.idStatut}"
                                  rows="10" paginator="true">
                         <f:facet name="header">
@@ -55,7 +55,7 @@ and open the template in the editor.
                         </f:facet>
                         <p:ajax event="rowSelect" update=":form" />
                         <p:column headerText="Libellé">
-                            <p:outputLabel value="#{statut.libelle}" />
+                            <p:outputLabel value="#{statut.SLibelle}" />
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton update=":form:tableStatuts" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbStatutService.createStatut()}" />
@@ -69,7 +69,7 @@ and open the template in the editor.
                         <p:outputPanel id="statutDetail" >
                             <p:panelGrid columns="2" rendered="#{not empty TbStatutService.selectedStatut}" columnClasses="label,value">
                                 <h:outputText value="Libellé" />
-                                <h:inputText value="#{TbStatutService.selectedStatut.libelle}" style="width: 300px;" />
+                                <h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
                             </p:panelGrid>
                             <br/>
                             <p:commandButton update=":form:tableStatuts" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbStatutService.saveStatut(TbStatutService.selectedStatut)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>

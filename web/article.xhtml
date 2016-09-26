@@ -10,7 +10,7 @@
             <ui:define name="content">
 
                 <h:form id="form">
-                    <p:dataTable id="tablesArticles" var="article" value="#{TbArticleService.loadArticles()}"
+                    <p:dataTable id="tableArticles" var="article" value="#{TbArticleService.loadArticles()}"
                                  selectionMode="single" selection="#{TbArticleService.selectedArticle}" rowKey="#{article.idArticle}"
                                  editable="true"
                                  rows="10" paginator="true">
@@ -36,10 +36,9 @@
                         <p:column headerText="Image">
                             <p:cellEditor>
                                 <f:facet name="output"><p:outputLabel value="#{article.tbImage.urlImage}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{article.tbImage.urlImage}" /></f:facet>
                                 <f:facet name="input">
                                     <p:selectOneMenu value="#{article.tbImage}">
-                                        <f:selectItems var="image" itemLabel="#{image.urlImage}" value="#{TbImageService.loadImage()}" />
+                                        <f:selectItems var="image" itemValue="#{image}" itemLabel="#{image.urlImage}" value="#{TbImageService.loadImage()}" />
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
@@ -53,17 +52,18 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <!--
+
                         <p:column headerText="Catégorie" sortBy="#{article.tbCategorie.CLibelle}" filterBy="#{article.tbCategorie.CLibelle}">
                             <p:cellEditor>
                                 <f:facet name="output"><p:outputLabel value="#{article.tbCategorie.CLibelle}" /></f:facet>
-                                <f:facet name="input"><p:selectOneMenu value="#{article.tbCategorie}">
-                                        <f:selectItems var="categorie" itemLabel="#{categorie.CLibelle}" value="#{TbCategorieService.loadCategorie()}" />
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{article.tbCategorie}">
+                                        <f:selectItems var="categorie" itemLabel="#{categorie.CLibelle}" itemValue="#{categorie}" value="#{TbCategorieService.loadCategorie()}" />
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        -->
+
 
                         <p:column headerText="Prix HT" sortBy="#{article.APht}" >
                             <p:cellEditor>
@@ -91,9 +91,9 @@
                         </p:column>
 
                         <f:facet name="footer">
-                            <p:commandButton update=":form:tablesArticles" actionListener="#{TbArticleService.createArticle()}" icon="ui-icon-plusthick" value="Ajouter" />
+                            <p:commandButton update=":form:tableArticles" actionListener="#{TbArticleService.createArticle()}" icon="ui-icon-plusthick" value="Ajouter" />
                             <!--<p:commandButton update=":form:articleDialog" icon="ui-icon-search" value="Editer" oncomplete="PF('articleDialog').show()" disabled="#{empty TbArticleService.selectedArticle}" />-->
-                            <p:commandButton update=":form:tablesArticles" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" disabled="#{empty TbArticleService.selectedArticle}" />
+                            <p:commandButton update=":form:tableArticles" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" disabled="#{empty TbArticleService.selectedArticle}" />
                         </f:facet>
                     </p:dataTable>
 

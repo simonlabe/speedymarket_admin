@@ -1,0 +1,147 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 26 sept. 2016, 18:57:21
+    Author     : gael
+*/
+
+.ui-widget-content {
+    border: 0 transparent solid;
+}
+
+.ui-widget-header {
+    background: white;
+    border: 0;
+}
+
+.ui-tabmenu-nav {
+    background-image: linear-gradient(180deg, #DDD, #EEE);
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    background: #C7C7C7;
+    border-radius: 0;
+    border: 0;
+    text-shadow: 0 0 0 transparent;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active{
+    background: white !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    text-shadow: 0 0 0 transparent;
+}
+
+.ui-state-default {
+    -webkit-box-shadow: 0px 0px 0px transparent;
+    box-shadow: 0px 0px 0px transparent;
+}
+
+.ui-datatable {
+    margin: 0 16px;
+}
+
+th[role=columnheader] {
+    background: white !important;
+}
+
+.ui-datatable thead th {
+    border: 0;
+    border-bottom: 2px #777 solid;
+}
+
+.ui-column-filter {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px #777 solid;
+}
+
+.ui-inputfield.ui-state-focus,
+.ui-inpurfield.ui-state-hover,
+.ui-widget-content.ui-inputfield.ui-state-focus
+{
+    box-shadow: 0 0 0 transparent !important;
+    border-bottom: 1px #89ab53 solid;
+}
+
+.ui-inputfield,
+.ui-widget-content .ui-inputfield,
+.ui-widget-header .ui-inputfield,
+.ui-state-default,
+.ui-widget-content.ui-state-default,
+.ui-widget-header.ui-state-default
+{
+    background-color: white;
+    box-shadow: 0 0 0 transparent;
+}
+
+.ui-datatable-header {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: left;
+}
+
+.ui-paginator-page,
+.ui-paginator-next,
+.ui-paginator-last,
+.ui-paginator-prev,
+.ui-paginator-first {
+    background: white !important;
+    font-weight: normal !important;
+}
+
+.ui-paginator-page.ui-state-active {
+    background: white !important;
+    font-weight: bold !important;
+}
+
+.ui-datatable-selectable.ui-state-highlight {
+    border: 0;
+    background: #777;
+    text-shadow: 0 0 0 transparent;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+    border-width: 0;
+}
+
+.ui-selectonemenu .ui-selectonemenu-label {
+    overflow: inherit;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+    right: -8px;
+}
+
+.ui-spinner-input.ui-inputfield {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ui-row-editing.ui-state-highlight {
+    height: 3em;
+}
+
+.ui-datatable-selectable.ui-state-hover,
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus{
+    box-shadow: 0 0 0 transparent;
+    background: #C7C7C7;
+}
+
+.ui-widget-content.ui-treetable-selectable-node.default:nth-child(even) {
+    background-color: #F2F5F9;
+}

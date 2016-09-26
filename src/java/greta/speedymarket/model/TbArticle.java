@@ -57,6 +57,9 @@ public class TbArticle  implements java.io.Serializable {
         this.tbCategorie = tbCategorie;
     }
     public TbImage getTbImage() {
+        if (this.tbImage == null) {
+            this.tbImage = new TbImage("", "");
+        }
         return this.tbImage;
     }
 

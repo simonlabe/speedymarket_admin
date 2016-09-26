@@ -64,30 +64,31 @@ and open the template in the editor.
 
                         <p:column headerText="Libellé" sortBy="#{article.ADesignation}" filterBy="#{article.ADesignation}">
                             <p:cellEditor>
-                                <f:facet name="outputL"><p:outputLabel value="#{article.ADesignation}" /></f:facet>
-                                <f:facet name="inputL"><p:inputText value="#{article.ADesignation}"/></f:facet>
+                                <f:facet name="output"><p:outputLabel value="#{article.ADesignation}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{article.ADesignation}"/></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Image">
                             <p:cellEditor>
-                                <f:facet name="ouputI"><p:outputLabel value="#{article.tbImage.urlImage}" /></f:facet>
-                                <f:facet name="inputI"><p:inputText value="#{article.tbImage.urlImage}" /></f:facet>
+                                <f:facet name="output"><p:outputLabel value="#{article.tbImage.urlImage}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{article.tbImage.urlImage}" /></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Description" sortBy="#{article.ADescription}" filterBy="#{article.ADescription}">
                             <p:cellEditor>
-                                <f:facet name="outputD"><p:outputLabel value="#{article.ADescription}" /></f:facet>
-                                <f:facet name="inputD"><p:inputText value="#{article.ADescription}" /></f:facet>
+                                <f:facet name="output"><p:outputLabel value="#{article.ADescription}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{article.ADescription}" /></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Catégorie" sortBy="#{article.tbCategorie.CLibelle}" filterBy="#{article.tbCategorie.CLibelle}">
                             <p:cellEditor>
-                                <f:facet name="outputC"><p:outputLabel value="#{article.tbCategorie.CLibelle}" /></f:facet>
-                                <f:facet name="inputC"><p:selectOneMenu value="#{article.tbCategorie}">
-                                        <f:selectItem value="Aucune" />
+                                <f:facet name="output"><p:outputLabel value="#{article.tbCategorie.CLibelle}" /></f:facet>
+                                <!--<f:facet name="input"><p:inputText value="#{article.tbCategorie.CLibelle}" /></f:facet>-->
+                                <f:facet name="input"><p:selectOneMenu value="#{article.tbCategorie}">
+                                        <!--<f:selectItem value="Aucune" />-->
                                         <f:selectItems var="categorie" itemLabel="#{categorie.CLibelle}" value="#{TbCategorieService.loadCategorie()}" />
                                     </p:selectOneMenu>
                                 </f:facet>
@@ -96,22 +97,22 @@ and open the template in the editor.
 
                         <p:column headerText="Prix HT" sortBy="#{article.APht}" >
                             <p:cellEditor>
-                                <f:facet name="outputP"><p:outputLabel value="#{article.APht}" /></f:facet>
-                                <f:facet name="inputP"><p:spinner value="#{article.APht}" stepFactor="0.05" min="0" suffix="€" /></f:facet>
+                                <f:facet name="output"><p:outputLabel value="#{article.APht}" />€</f:facet>
+                                <f:facet name="input"><p:spinner value="#{article.APht}" stepFactor="0.05" min="0" suffix="€" /></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Stock" sortBy="#{article.AQuantiteStock}">
                             <p:cellEditor>
-                                <f:facet name="outputS"><p:outputLabel value="#{article.AQuantiteStock}" /></f:facet>
-                                <f:facet name="inputS"><p:spinner value="#{article.AQuantiteStock}" stepFactor="1" min="0" /></f:facet>
+                                <f:facet name="output"><p:outputLabel value="#{article.AQuantiteStock}" /></f:facet>
+                                <f:facet name="input"><p:spinner value="#{article.AQuantiteStock}" stepFactor="1" min="0" /></f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column headerText="Visible" sortBy="#{article.AVisible}">
                             <p:cellEditor>
-                                <f:facet name="outputV"><p:selectBooleanButton value="#{article.AVisible}" onLabel="Visible" offLabel="Non visible" disabled="true" /></f:facet>
-                                <f:facet name="inputV"><p:selectBooleanButton value="#{article.AVisible}" onLabel="Visible" offLabel="Non visible" disabled="false"/></f:facet>
+                                <f:facet name="output"><p:selectBooleanButton value="#{article.AVisible}" onLabel="Visible" offLabel="Non visible" disabled="true" /></f:facet>
+                                <f:facet name="input"><p:selectBooleanButton value="#{article.AVisible}" onLabel="Visible" offLabel="Non visible" disabled="false"/></f:facet>
                             </p:cellEditor>
                         </p:column>
 

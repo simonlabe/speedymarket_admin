@@ -45,6 +45,8 @@ public class TbPreparateurService {
         if (preparateur != null) {
             TbPreparateurDAO tbPreparateurDAO=  new TbPreparateurDAO();
             tbPreparateurDAO.update(preparateur);
+            
+            this.preparateurs = tbPreparateurDAO.findAll();
         }
     }
 

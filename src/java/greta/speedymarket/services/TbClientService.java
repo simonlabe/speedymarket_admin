@@ -8,6 +8,7 @@ package greta.speedymarket.services;
 import greta.speedymarket.dao.TbClientDAO;
 import greta.speedymarket.model.TbClient;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 /**
@@ -19,7 +20,20 @@ import javax.faces.bean.ViewScoped;
 public class TbClientService {
     
     private TbClient selectedClient;
+    private List<TbClient> clients;
     
+    @PostConstruct
+    public void init() {
+        clients = this.loadClient();
+    }
+
+    public void onRowEdit() {
+        this.saveClient(selectedClient);
+    }
+
+    public void onRowEditCancel() {
+        return;
+    }
     public TbClient getSelectedClient(){
         return this.selectedClient;
     }

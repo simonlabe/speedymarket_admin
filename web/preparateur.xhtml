@@ -86,24 +86,10 @@
                 </p:column>
 
                 <f:facet name="footer">
-                    <p:commandButton update="tablePreparateurs" actionListener="#{TbPersonneService.createPersonne()}" icon="ui-icon-plusthick" value="Ajouter" />
+                    <p:commandButton update=":form:tablePreparateurs" actionListener="#{TbPreparateurService.createPreparateur()}" icon="ui-icon-plusthick" value="Ajouter" />
                     <!--<p:commandButton update=":form:articleDialog" icon="ui-icon-search" value="Editer" oncomplete="PF('articleDialog').show()" disabled="#{empty TbPreparateurService.selectedPreparateur}" />-->
-                    <p:commandButton update="tablePreparateurs" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbPreparateurService.deletePreparateur(TbPreparateurService.selectedPreparateur)}" disabled="#{empty TbPreparateurService.selectedPreparateur}" />
+                    <p:commandButton update=":form:tablePreparateurs" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbPreparateurService.deletePreparateur(TbPreparateurService.selectedPreparateur)}" disabled="#{empty TbPreparateurService.selectedPreparateur}" />
                 </f:facet>
-
-                <!--  
-                  <p:column headerText="identifiant">
-                      <p:outputLabel value="#{preparateur.idPersonne}" />
-                  </p:column>
-                  <p:column headerText="Nom et prénom">
-                      <p:outputLabel value="#{preparateur.tbPersonne}" />
-                  </p:column>
-                
-                <f:facet name="footer">
-                    <p:commandButton update=":form:tablePreparateurs" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbPreparateurService.createPreparateur()}" />
-                    <p:commandButton update=":form:preparateurDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbPreparateurService.getSelectedPreparateur()}" />
-                </f:facet>
-                -->
             </p:dataTable>
             <!-- 
             <p:dialog header="Détail preparateur" widgetVar="statutDialog"

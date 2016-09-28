@@ -1,54 +1,100 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>Speedy Market Admin</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    </h:head>
 
-    <h:body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
 
-        <div id="header">
-            <div id="headerContent">
-                <h2>Speedy Market</h2>
-            </div>
-        </div>
+    <ui:define name="content">
+           <h:form id="form">
+            <p:dataTable id="tableClients" var="client" value="#{TbClientService.loadClient()}"
+                         selectionMode="single" 
+                         selection="#{TbClientService.selectedClient}" rowKey="#{client.idPersonne}"
+                         editable="true"
+                         rows="10" paginator="true">
+                <f:facet name="header">
+                    Liste des clients
+                </f:facet>
+                
+                <p:ajax event="rowEdit" listener="#{TbPersonneService.onRowEdit()}" />
+                <p:ajax event="rowEditCancel" listener="#{TbPersonneService.onRowEditCancel()}"/>
+                
+                <p:column headerText="ID" sortBy="#{client.idPersonne}">
+                    <p:outputLabel value="#{client.idPersonne}" />
+                </p:column>
 
-        <h:panelGroup id="content" layout="block">
-            <ui:insert name="content">Main Content</ui:insert>
-        </h:panelGroup>
+                <p:column headerText="Nom" sortBy="#{client.tbPersonne.PNom}" filterBy="#{client.tbPersonne.PNom}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PNom}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PNom}"/></f:facet>   
+                    </p:cellEditor>
+                </p:column>
 
-        <div id="footer">
-            <span>
-                <h1>SpeedyMarket</h1>
-                <i>Application d'administration des produits, comptes, commandes...</i>
-            </span>
-        </div>
+                <p:column headerText="Prénom" sortBy="#{client.tbPersonne.PPrenom}" filterBy="#{client.tbPersonne.PPrenom}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PPrenom}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.tbPersonne.PPrenom}"/></f:facet> 
+                    </p:cellEditor>
+                </p:column>
 
-        <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                        xmlns:ui="http://java.sun.com/jsf/facelets"
-                        xmlns:f="http://java.sun.com/jsf/core"
-                        xmlns:h="http://java.sun.com/jsf/html"
-                        xmlns:c="http://java.sun.com/jsp/jstl/core"
-                        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-                        template="/templates/template.xhtml">
+                <p:column headerText="Adresse" sortBy="#{client.tbPersonne.PArue}" filterBy="#{client.tbPersonne.PArue}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PArue}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.tbPersonne.PArue}"/></f:facet>   
+                    </p:cellEditor>
+                </p:column>
 
-            <ui:define name="content">
+                <p:column headerText="Ville" sortBy="#{client.tbPersonne.PAville}" filterBy="#{client.tbPersonne.PAville}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PAville}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PAville}"/></f:facet>    
+                    </p:cellEditor>
+                </p:column>
 
-                CATEGORIES
-            </ui:define>
-        </ui:composition>
-    </h:body>
+                <p:column headerText="Code Postal" sortBy="#{client.tbPersonne.PAcp}" filterBy="#{client.tbPersonne.PAcp}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PAcp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.tbPersonne.PAcp}"/></f:facet>    
+                    </p:cellEditor>
+                </p:column>
 
-</html>
+                <p:column headerText="Téléphone" sortBy="#{client.tbPersonne.PTel}" filterBy="#{client.tbPersonne.PTel}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PTel}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.tbPersonne.PTel}"/></f:facet>    
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="E-mail" sortBy="#{client.tbPersonne.PMail}" filterBy="#{client.tbPersonne.PMail}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{client.tbPersonne.PMail}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.tbPersonne.PMail}"/></f:facet>   
+                    </p:cellEditor>
+                </p:column>
+                <!--
+                <p:column headerText="Mot de passe" sortBy="#{preparateur.tbPersonne.PMdp}" filterBy="#{preparateur.tbPersonne.PMdp}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PMdp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PMdp}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+                
+                <f:facet name="footer">
+                    <p:commandButton update="tableClients" actionListener="#{TbPersonneService.createPersonne()}" icon="ui-icon-plusthick" value="Ajouter" />
+                    <p:commandButton update=":form:articleDialog" icon="ui-icon-search" value="Editer" oncomplete="PF('articleDialog').show()" disabled="#{empty TbPreparateurService.selectedPreparateur}" />
+                    <p:commandButton update="tableClients" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbClientService.deleteClient(TbClientService.getSelectedClient)}" disabled="#{empty TbPreparateurService.selectedPreparateur}" />
+                </f:facet>
+                -->
+            </p:dataTable>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

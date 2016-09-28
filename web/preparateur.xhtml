@@ -10,23 +10,115 @@
     <ui:define name="content">
         <h:form id="form">
             <p:dataTable id="tablePreparateurs" var="preparateur" value="#{TbPreparateurService.loadPreparateurs()}"
-                         selectionMode="single" selection="#{TbPreparateurService.selectedPreparateur}" rowKey="#{preparateur.idPersonne}"
+                         selectionMode="single" 
+                         selection="#{TbPreparateurService.selectedPreparateur}" rowKey="#{preparateur.idPersonne}"
+                         editable="true"
                          rows="10" paginator="true">
                 <f:facet name="header">
                     Liste des préparateurs
                 </f:facet>
-                <p:ajax event="rowSelect" update=":form" />
-                <p:column headerText="identifiant">
+
+                <p:ajax event="rowEdit" listener="#{TbPersonneService.onRowEdit()}" />
+                <p:ajax event="rowEditCancel" listener="#{TbPersonneService.onRowEditCancel()}"/>
+
+                <p:column headerText="ID" sortBy="#{preparateur.idPersonne}">
                     <p:outputLabel value="#{preparateur.idPersonne}" />
                 </p:column>
-                <p:column headerText="Nom et prénom">
-                    <p:outputLabel value="#{preparateur.tbPersonne}" />
+
+                <p:column headerText="Nom" sortBy="#{preparateur.tbPersonne.PNom}" filterBy="#{preparateur.tbPersonne.PNom}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PNom}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PNom}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
+
+                <p:column headerText="Prénom" sortBy="#{preparateur.tbPersonne.PPrenom}" filterBy="#{preparateur.tbPersonne.PPrenom}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PPrenom}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PPrenom}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Adresse" sortBy="#{preparateur.tbPersonne.PArue}" filterBy="#{preparateur.tbPersonne.PArue}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PArue}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PArue}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Ville" sortBy="#{preparateur.tbPersonne.PAville}" filterBy="#{preparateur.tbPersonne.PAville}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PAville}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PAville}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Code Postal" sortBy="#{preparateur.tbPersonne.PAcp}" filterBy="#{preparateur.tbPersonne.PAcp}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PAcp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PAcp}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Téléphone" sortBy="#{preparateur.tbPersonne.PTel}" filterBy="#{preparateur.tbPersonne.PTel}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PTel}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PTel}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="E-mail" sortBy="#{preparateur.tbPersonne.PMail}" filterBy="#{preparateur.tbPersonne.PMail}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PMail}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PMail}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Mot de passe" sortBy="#{preparateur.tbPersonne.PMdp}" filterBy="#{preparateur.tbPersonne.PMdp}">
+                    <p:cellEditor>
+                        <f:facet name="output"><p:outputLabel value="#{preparateur.tbPersonne.PMdp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{preparateur.tbPersonne.PMdp}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+
+                <f:facet name="footer">
+                    <p:commandButton update="tablePreparateurs" actionListener="#{TbPersonneService.createPersonne()}" icon="ui-icon-plusthick" value="Ajouter" />
+                    <!--<p:commandButton update=":form:articleDialog" icon="ui-icon-search" value="Editer" oncomplete="PF('articleDialog').show()" disabled="#{empty TbPreparateurService.selectedPreparateur}" />-->
+                    <p:commandButton update="tablePreparateurs" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbPreparateurService.deletePreparateur(TbPreparateurService.selectedPreparateur)}" disabled="#{empty TbPreparateurService.selectedPreparateur}" />
+                </f:facet>
+
+                <!--  
+                  <p:column headerText="identifiant">
+                      <p:outputLabel value="#{preparateur.idPersonne}" />
+                  </p:column>
+                  <p:column headerText="Nom et prénom">
+                      <p:outputLabel value="#{preparateur.tbPersonne}" />
+                  </p:column>
+                
                 <f:facet name="footer">
                     <p:commandButton update=":form:tablePreparateurs" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbPreparateurService.createPreparateur()}" />
-                    <p:commandButton update=":form:preparateurDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbPreparateurService.selectedPreparateur()}" />
-                        </f:facet>
+                    <p:commandButton update=":form:preparateurDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbPreparateurService.getSelectedPreparateur()}" />
+                </f:facet>
+                -->
             </p:dataTable>
+            <!-- 
+            <p:dialog header="Détail preparateur" widgetVar="statutDialog"
+                      showEffect="fade" hideEffect="fade"
+                      resizable="true" height="100" width="450" >
+                <p:outputPanel id="preparateurDetail" >
+                    <p:panelGrid columns="2" rendered="#{not empty TbPreparateurService.getSelectedPreparateur}" columnClasses="label,value">
+                        <h:outputText value="Libellé" />
+                        <h:inputText value="#{TbCategorieService.selectedCategorie.CLibelle}" style="width: 300px;" />
+                    </p:panelGrid>
+                    <br/>
+                    <p:commandButton update=":form:tablePreparateurs" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbCategorieService.saveCategorie(TbCategorieService.selectedCategorie)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>
+                </p:outputPanel>
+            </p:dialog>
+           -->
         </h:form>
 
     </ui:define>

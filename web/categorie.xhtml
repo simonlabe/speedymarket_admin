@@ -46,29 +46,32 @@ and open the template in the editor.
 
             <ui:define name="content">
                 <h:form id="form">
-                    <p:dataTable id="tableCategorie" var="categorie" value="#{TbCategorieService.loadCategorie()}"
-                                 selectionMode="single" selection="#{TbCategorieService.selectedCategorie}" rowKey="#{categorie.idCategorie}"
-                                 rows="10" paginator="true">
+                    <p:treeTable id="tableCategorie" var="cat" value="#{TbCategorieService.root}"
+                                 selectionMode="single" selection="#{TbCategorieService.selectedNode}"
+                                 scrollable="true" scrollHeight="500"
+                                 resizableColumns="true" style="margin-top: 0">
                         <f:facet name="header">
                             Liste des catégories
                         </f:facet>
+                      <!--  
                         <p:ajax event="rowSelect" update=":form" />
+                       --> 
                         <p:column headerText="Libellé">
-                            <p:outputLabel value="#{categorie.CLibelle}" />
+                            <p:outputLabel value="#{cat.CLibelle}" />
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton update=":form:tableCategorie" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbCategorieService.createCategorie()}" />
                             <p:commandButton update=":form:categorieDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('statutDialog').show()" disabled="#{empty TbCategorieService.selectedCategorie}" />
                             <p:commandButton update=":form:tableCategorie" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbCategorieService.deleteCategorie(TbCategorieService.selectedCategorie)}" disabled="#{empty TbCategorieService.selectedCategorie}" />
                         </f:facet>
-                    </p:dataTable>
+                    </p:treeTable>
                     <p:dialog header="Détail catégorie" widgetVar="statutDialog"
                               showEffect="fade" hideEffect="fade"
                               resizable="true" height="100" width="450" >
                         <p:outputPanel id="categorieDetail" >
-                            <p:panelGrid columns="2" rendered="#{not empty TbCategorieService.selectedCategorie}" columnClasses="label,value">
+                            <p:panelGrid columns="2" rendered="#{not empty TbCategorieService.selectedNode}" columnClasses="label,value">
                                 <h:outputText value="Libellé" />
-                                <h:inputText value="#{TbCategorieService.selectedCategorie.CLibelle}" style="width: 300px;" />
+                                <h:inputText value="#{TbCategorieService.selectedNode.data.CLibelle}" style="width: 300px;" />
                             </p:panelGrid>
                             <br/>
                             <p:commandButton update=":form:tableCategorie" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbCategorieService.saveCategorie(TbCategorieService.selectedCategorie)}" onsuccess="PF('statutDialog').hide()" style="text-align: center;"/>

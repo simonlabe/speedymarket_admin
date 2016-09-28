@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                        xmlns:ui="http://java.sun.com/jsf/facelets"
+                        xmlns:f="http://java.sun.com/jsf/core"
+                        xmlns:h="http://java.sun.com/jsf/html"
+                        xmlns:c="http://java.sun.com/jsp/jstl/core"
+                        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                        xmlns:p="http://primefaces.org/ui"
+                        template="/templates/template.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="form">
+                    <p:dataTable id="tableArticles" var="article" value="#{TbArticleService.loadArticles()}"
+                                 selectionMode="single" selection="#{TbArticleService.selectedArticle}" rowKey="#{article.idArticle}"
+                                 editable="true"
+                                 rows="10" paginator="true">
+                        <f:facet name="header">
+                            Liste des produits
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{TbArticleService.onRowEdit()}" />
+                        <p:ajax event="rowEditCancel" listener="#{TbArticleService.onRowEditCancel()}" />
+
+                        <p:column headerText="ID" sortBy="#{article.idArticle}">
+                            <p:outputLabel value="#{article.idArticle}" />
+                        </p:column>
+
+                        <p:column headerText="Libellé" sortBy="#{article.ADesignation}" filterBy="#{article.ADesignation}">
+                            <p:cellEditor>
+                                <f:facet name="output"><p:outputLabel value="#{article.ADesignation}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{article.ADesignation}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <!--
+                        <p:column headerText="Image">
+                            <p:cellEditor>
+                                <f:facet name="output"><p:outputLabel value="#{article.tbImage.urlImage}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{article.tbImage}">
+                                        <f:selectItems var="image" itemValue="#{image}" itemLabel="#{image.urlImage}" value="#{TbImageService.loadImage()}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        -->
+
+                        <p:column headerText="Description" sortBy="#{article.ADescription}" filterBy="#{article.ADescription}">
+                            <p:cellEditor>
+                                <f:facet name="output"><p:outputLabel value="#{article.ADescription}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{article.ADescription}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Catégorie" sortBy="#{article.tbCategorie.CLibelle}" filterBy="#{article.tbCategorie.CLibelle}">
+                            <p:cellEditor>
+                                <f:facet name="output"><p:outputLabel value="#{article.tbCategorie.CLibelle}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{article.tbCategorie}">
+                                        <f:selectItems var="categorie" itemLabel="#{categorie.CLibelle}" itemValue="#{categorie}" value="#{TbCategorieService.loadCategorie()}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Prix HT" sortBy="#{article.APht}" >
+                            <p:cellEditor>
+                                <f:facet name="output"><p:outputLabel value="#{article.APht}" />€</f:facet>
+                                <f:facet name="input"><p:spinner value="#{article.APht}" stepFactor="0.05" min="0" suffix="€" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Stock" sortBy="#{article.AQuantiteStock}">
+                            <p:cellEditor>
+                                <f:facet name="output"><p:outputLabel value="#{article.AQuantiteStock}" /></f:facet>
+                                <f:facet name="input"><p:spinner value="#{article.AQuantiteStock}" stepFactor="1" min="0" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Visible" sortBy="#{article.AVisible}">
+                            <p:cellEditor>
+                                <f:facet name="output"><p:selectBooleanButton value="#{article.AVisible}" onLabel="Visible" offLabel="Non visible" disabled="true" /></f:facet>
+                                <f:facet name="input"><p:selectBooleanButton value="#{article.AVisible}" onLabel="Visible" offLabel="Non visible" disabled="false"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton update=":form:tableArticles" actionListener="#{TbArticleService.createArticle()}" icon="ui-icon-plusthick" value="Ajouter" />
+                            <!--<p:commandButton update=":form:articleDialog" icon="ui-icon-search" value="Editer" oncomplete="PF('articleDialog').show()" disabled="#{empty TbArticleService.selectedArticle}" />-->
+                            <p:commandButton update=":form:tableArticles" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" disabled="#{empty TbArticleService.selectedArticle}" />
+                        </f:facet>
+                    </p:dataTable>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>

@@ -3,6 +3,7 @@ package greta.speedymarket.services;
 import greta.speedymarket.dao.TbPreparateurDAO;
 import greta.speedymarket.model.TbPreparateur;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -11,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 public class TbPreparateurService {
 
     private TbPreparateur selectedPreparateur;
+    private List<TbPreparateur> preparateurs;
 
     public TbPreparateur getSelectedPreparateur() {
         return this.selectedPreparateur;
@@ -18,6 +20,19 @@ public class TbPreparateurService {
 
     public void setSelectedPreparateur(TbPreparateur selectedPreparateur) {
         this.selectedPreparateur = selectedPreparateur;
+    }
+    
+    @PostConstruct
+    public void init() {
+        preparateurs = this.loadPreparateurs();
+    }
+
+    public void onRowEdit() {
+        this.savePreparateur(selectedPreparateur);
+    }
+
+    public void onRowEditCancel() {
+        return;
     }
 
     public void createPreparateur() {
@@ -30,6 +45,8 @@ public class TbPreparateurService {
         if (preparateur != null) {
             TbPreparateurDAO tbPreparateurDAO=  new TbPreparateurDAO();
             tbPreparateurDAO.update(preparateur);
+            
+            this.preparateurs = tbPreparateurDAO.findAll();
         }
     }
 

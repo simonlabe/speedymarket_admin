@@ -3,6 +3,7 @@ package greta.speedymarket.services;
 import greta.speedymarket.dao.TbPersonneDAO;
 import greta.speedymarket.model.TbPersonne;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -11,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 public class TbPersonneService {
 
     private TbPersonne selectedPersonne;
+    private List<TbPersonne> personnes;
 
     public TbPersonne getSelectedPersonne() {
         return this.selectedPersonne;
@@ -18,6 +20,19 @@ public class TbPersonneService {
 
     public void setSelectedPersonne(TbPersonne selectedPersonne) {
         this.selectedPersonne = selectedPersonne;
+    }
+    
+    @PostConstruct
+    public void init() {
+        personnes = this.loadPersonnes();
+    }
+
+    public void onRowEdit() {
+        this.savePersonne(selectedPersonne);
+    }
+
+    public void onRowEditCancel() {
+        return;
     }
 
     public void createPersonne() {
